@@ -35,7 +35,19 @@
         .hero { height: 100vh; }
         .logo-frame { position: relative; padding: 30px; margin-bottom: 20px; border-radius: 50%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 0 15px rgba(0, 210, 255, 0.1); transition: transform 0.5s ease; }
         .logo-frame:hover { transform: scale(1.03) rotate(1deg); }
-        .logo-img { width: 140px; height: 140px; border-radius: 50%; filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4)); }
+        .logo-img {
+            width: 140px;
+            height: 140px;
+            /* Добавляем легкий светлый фон, чтобы логотип "оторвался" от черного сайта */
+            background: rgba(255, 255, 255, 0.05); 
+            border-radius: 50%;
+            /* Улучшаем качество сжатия картинки */
+            object-fit: contain;
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: high-quality;
+            /* Убираем лишнее, чтобы логотип не размазывался */
+            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4));
+        }
         h1 { font-size: 4.5rem; font-weight: 800; margin: 10px 0; letter-spacing: -2px; background: linear-gradient(135deg, #ffffff 0%, #b0efff 50%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.2)); }
         .hero p { color: var(--text-muted); font-size: 1.3rem; font-weight: 300; margin-bottom: 40px; max-width: 600px; text-align: center; line-height: 1.6; }
 
