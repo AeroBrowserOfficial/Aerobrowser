@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AeroBrowser — The Future of Web Browsing</title>
     <style>
-        /* БАЗОВЫЕ НАСТРОЙКИ (АБСОЛЮТНАЯ ЧЕРНОТА И ПЛАВНЫЙ СКРОЛЛ) */
+        /* БАЗОВЫЕ НАСТРОЙКИ */
         :root {
             --bg-color: #000000;
             --primary-glow: #00d2ff;
             --secondary-glow: #3aedff;
-            --linux-glow: #ff9900; /* Оранжевый акцент для Linux */
+            --linux-glow: #ff9900;
             --linux-glow-hover: #ffb84d;
             --card-bg: rgba(255, 255, 255, 0.02);
             --card-border: rgba(255, 255, 255, 0.05);
@@ -18,158 +18,38 @@
             --text-muted: #888888;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; padding: 0; background-color: var(--bg-color); font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--text-main); overflow-x: hidden; }
 
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
+        /* КОСМИЧЕСКИЙ ФОН */
+        .space-bg { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px), radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px); background-size: 350px 350px, 250px 250px; background-position: 0 0, 130px 270px; z-index: 1; opacity: 0.5; }
+        .nebula { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 80vh; background: radial-gradient(circle, rgba(0,210,255,0.05) 0%, rgba(0,0,0,0) 70%); border-radius: 50%; z-index: 2; filter: blur(80px); pointer-events: none; }
+        section { position: relative; z-index: 10; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; box-sizing: border-box; }
 
-        /* КОСМИЧЕСКИЙ ЗАДНИЙ ФОН И ТУМАННОСТЬ */
-        .space-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: 
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 350px 350px, 250px 250px;
-            background-position: 0 0, 130px 270px;
-            z-index: 1;
-            opacity: 0.5;
-        }
+        /* HERO СЕКЦИЯ */
+        .hero { height: 100vh; }
+        .logo-frame { position: relative; padding: 30px; margin-bottom: 20px; border-radius: 50%; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 0 15px rgba(0, 210, 255, 0.1); transition: transform 0.5s ease; }
+        .logo-frame:hover { transform: scale(1.03) rotate(1deg); }
+        .logo-img { width: 140px; height: 140px; border-radius: 50%; filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4)); }
+        h1 { font-size: 4.5rem; font-weight: 800; margin: 10px 0; letter-spacing: -2px; background: linear-gradient(135deg, #ffffff 0%, #b0efff 50%, #ffffff 100%); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.2)); }
+        .hero p { color: var(--text-muted); font-size: 1.3rem; font-weight: 300; margin-bottom: 40px; max-width: 600px; text-align: center; line-height: 1.6; }
 
-        .nebula {
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80vw; height: 80vh;
-            background: radial-gradient(circle, rgba(0,210,255,0.05) 0%, rgba(0,0,0,0) 70%);
-            border-radius: 50%;
-            z-index: 2;
-            filter: blur(80px);
-            pointer-events: none;
-        }
-
-        section {
-            position: relative;
-            z-index: 10;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
-            box-sizing: border-box;
-        }
-
-        /* --- СЕКЦИЯ 1: ГЛАВНЫЙ ЭКРАН --- */
-        .hero {
-            height: 100vh;
-        }
-
-        .logo-frame {
-            position: relative;
-            padding: 30px;
-            margin-bottom: 20px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.1);
-            transition: transform 0.5s ease;
-        }
-
-        .logo-frame:hover {
-            transform: scale(1.03) rotate(1deg);
-        }
-
-        .logo-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            filter: drop-shadow(0 0 10px rgba(0, 210, 255, 0.4));
-        }
-
-        h1 {
-            font-size: 4.5rem;
-            font-weight: 800;
-            margin: 10px 0;
-            letter-spacing: -2px;
-            background: linear-gradient(135deg, #ffffff 0%, #b0efff 50%, #ffffff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.2));
-        }
-
-        .hero p {
-            color: var(--text-muted);
-            font-size: 1.3rem;
-            font-weight: 300;
-            margin-bottom: 40px;
-            max-width: 600px;
-            text-align: center;
-            line-height: 1.6;
-        }
-
-        /* КОНТЕЙНЕР ДЛЯ КНОПОК */
-        .buttons-container {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        .download-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 18px 38px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            text-decoration: none;
-            color: #000;
-            border-radius: 50px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: all 0.3s ease;
-        }
-
+        /* КНОПКИ */
+        .buttons-container { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; z-index: 10; }
+        .download-btn { padding: 18px 38px; font-size: 1.1rem; font-weight: 600; text-decoration: none; color: #000; border-radius: 50px; border: 1px solid rgba(255,255,255,0.1); transition: all 0.3s ease; }
         .btn-win { background: var(--primary-glow); }
         .btn-win:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 210, 255, 0.4); background: var(--secondary-glow); }
-        
         .btn-linux { background: var(--linux-glow); }
         .btn-linux:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(255, 153, 0, 0.4); background: var(--linux-glow-hover); }
 
-        /* --- СЕКЦИЯ СКРИНШОТОВ --- */
-        .section-title { font-size: 2.5rem; margin-bottom: 50px; letter-spacing: -1px; text-align: center; }
-        .gallery { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; max-width: 1200px; margin-top: 20px; }
-        .screen-frame { 
-            width: 400px; 
-            height: auto; 
-            background: #000; /* Черный фон внутри рамки */
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 8px; 
-            overflow: hidden; 
-            transition: 0.4s; 
-            padding: 10px;    /* Добавили отступ, чтобы кнопки не прилипали к краю */
-        }
+        /* ГАЛЕРЕЯ СКРИНШОТОВ */
+        .section-title { font-size: 2.5rem; margin-bottom: 50px; text-align: center; }
+        .gallery { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; max-width: 1200px; margin-top: 30px; }
+        .screen-frame { width: 450px; height: auto; background: #000; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; overflow: hidden; padding: 5px; transition: 0.4s; }
+        .screen-frame:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3); }
+        .screen-frame img { width: 100%; height: auto; display: block; }
 
-        .screen-frame img { 
-            width: 100%; 
-            height: auto; 
-            display: block;
-            border-radius: 4px; /* Скруглим саму картинку внутри */
-        }
-        .screen-frame:hover { transform: translateY(-10px); box-shadow: 0 10px 30px rgba(0, 210, 255, 0.3); }
-
-        /* --- СЕКЦИЯ: О БРАУЗЕРЕ --- */
+        /* FEATURES */
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; width: 100%; max-width: 1100px; }
         .feature-card { background: var(--card-bg); border: 1px solid var(--card-border); padding: 40px 30px; border-radius: 20px; transition: all 0.4s ease; text-align: left; }
         .feature-card:hover { transform: translateY(-5px); border-color: rgba(0, 210, 255, 0.2); }
@@ -177,10 +57,7 @@
         .feature-card h3 { font-size: 1.5rem; margin: 0 0 15px 0; }
         .feature-card p { color: var(--text-muted); line-height: 1.6; }
 
-        @media (max-width: 768px) {
-            h1 { font-size: 2.8rem; }
-            .features-grid { grid-template-columns: 1fr; }
-        }
+        @media (max-width: 768px) { h1 { font-size: 2.8rem; } .features-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -189,19 +66,15 @@
     <div class="nebula"></div>
 
     <section class="hero">
-        <div class="logo-frame">
-            <img src="icon.png" alt="AeroBrowser Logo" class="logo-img">
-        </div>
+        <div class="logo-frame"><img src="icon.png" alt="AeroBrowser Logo" class="logo-img"></div>
         <h1>AeroBrowser</h1>
         <p>Lightweight, fast, and modern next-gen web browser. Experience speed that stays ahead of time.</p>
-        
         <div class="buttons-container">
             <a href="https://github.com/AeroBrowserOfficial/aerobrowser.github.io/releases/latest/download/AeroBrowserWindowsSetup.exe" class="download-btn btn-win">Download for Windows ❖</a>
             <a href="https://github.com/AeroBrowserOfficial/aerobrowser.github.io/releases/latest/download/AeroBrowserLinuxSetup.AppImage" class="download-btn btn-linux">Download for Linux 🐧</a>
         </div>
     </section>
 
-<!-- СЕКЦИЯ СКРИНШОТОВ -->
     <section id="screenshots">
         <h2 class="section-title">See AeroBrowser in Action</h2>
         <div class="gallery">
@@ -209,32 +82,6 @@
             <div class="screen-frame"><img src="screenshot2.png" alt="Dark Mode"></div>
         </div>
     </section>
-
-    <style>
-        /* Обновленные стили для галереи */
-        .gallery { 
-            display: flex; 
-            gap: 40px; /* Увеличил отступ */
-            flex-wrap: wrap; 
-            justify-content: center; 
-            max-width: 1200px; 
-            margin-top: 30px; 
-        }
-        .screen-frame { 
-            width: 500px; /* Увеличил ширину для лучшей видимости */
-            height: 315px; /* Увеличил высоту пропорционально */
-            background: rgba(255, 255, 255, 0.05); 
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            border-radius: 20px; /* Чуть скруглил углы */
-            overflow: hidden; 
-            transition: 0.4s; 
-        }
-        .screen-frame:hover { 
-            transform: translateY(-10px) scale(1.02); 
-            box-shadow: 0 15px 40px rgba(0, 210, 255, 0.3); 
-        }
-        .screen-frame img { width: 100%; height: 100%; object-fit: cover; }
-    </style>
 
     <section id="about">
         <h2 class="section-title">Why AeroBrowser?</h2>
